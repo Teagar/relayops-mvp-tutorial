@@ -205,3 +205,12 @@ Uma tentativa de `complete_mission` retornou corretamente quatro blockers `LIVE_
 - O download precisa de permissão normal do navegador.
 - O design carrega fontes do Google com fallback seguro; um ambiente totalmente offline deve empacotar as fontes.
 - Testes cobrem domínio e jornada crítica; uma evolução deve adicionar testes de edição, remoção, importação e contraste automatizado.
+
+## Melhorias identificadas no ecossistema
+
+Nenhum bug bloqueante foi encontrado no Teagarden, OverClick ou OpenCode durante esta jornada. Duas features reduziriam bastante o trabalho manual em tutoriais e auditorias:
+
+1. **Captura de evidência nativa no Teagarden:** um tool como `capture_evidence` poderia capturar a janela/pane, salvar a imagem no workspace e anexá-la diretamente ao task/handoff. Neste tutorial foi necessário combinar `grim`, caminho de arquivo e `save_result_draft` manualmente.
+2. **Vínculo estruturado Teagarden ↔ OverClick:** hoje `ROM-1` foi registrado no contexto textual da missão e dos briefs. Campos opcionais `externalSystem`/`externalTaskId` permitiriam abrir o card a partir do Teagarden e reconciliar status sem depender de texto livre.
+
+Também houve avisos de engine porque o ambiente usa Node 25, enquanto releases recentes de Vitest/jsdom qualificam linhas LTS. A aplicação passou em todos os checks, mas um projeto de produção deve fixar Node 24 LTS em `.nvmrc` ou `mise.toml` para evitar variação futura.
