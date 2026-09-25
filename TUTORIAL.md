@@ -192,6 +192,12 @@ A entrega final exige quatro níveis independentes:
 
 Esse encadeamento permite que outra pessoa audite não só “o que ficou pronto”, mas também quem executou, sob qual contexto, quais critérios foram usados e quais evidências sustentam a conclusão.
 
+Por fim, cada worker salvou um result draft schema-v1 e chamou `submit_handoff`. O Teagarden recusaria um resultado parcial; os três foram aceitos com `status: done`, artefato e evidência ligados ao task original.
+
+![Handoffs concluídos no Teagarden](docs/screenshots/09-handoffs-concluidos.png)
+
+Uma tentativa de `complete_mission` retornou corretamente quatro blockers `LIVE_PANE` — comportamento fail-closed, sem escrita parcial. Só então usei `close_and_archive_mission`, que encerrou os quatro PTYs e arquivou atomicamente a missão com **3 tasks done, 3 handoffs e 0 falhas**.
+
 ## Limitações conscientes do MVP
 
 - Dados são locais ao navegador; colaboração exige backend posterior.
